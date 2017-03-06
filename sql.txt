@@ -1,0 +1,199 @@
+-- phpMyAdmin SQL Dump
+-- version 4.5.4.1deb2ubuntu2
+-- http://www.phpmyadmin.net
+--
+-- Host: mysql.stud.ntnu.no
+-- Generation Time: Mar 01, 2017 at 05:23 PM
+-- Server version: 5.5.54-0ubuntu0.12.04.1
+-- PHP Version: 7.0.13-0ubuntu0.16.04.1
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `henrisor_69`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Gruppe`
+--
+
+CREATE TABLE `Gruppe` (
+  `GruppeID` int(11) NOT NULL,
+  `Navn` varchar(50) NOT NULL,
+  `Annen_gruppe` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Kondisjon`
+--
+
+CREATE TABLE `Kondisjon` (
+  `KondisjonID` int(11) NOT NULL,
+  `Belastning` int(11) NOT NULL,
+  `Antall repetisjoner` int(11) NOT NULL,
+  `Antall sett` int(11) NOT NULL,
+  `OvelseID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Okt`
+--
+
+CREATE TABLE `Okt` (
+  `OktID` int(11) NOT NULL,
+  `Dato` date NOT NULL,
+  `Tidspunkt` time NOT NULL,
+  `Varighet` int(11) NOT NULL,
+  `MalID` int(11) NOT NULL,
+  `Personlig form` varchar(30) NOT NULL,
+  `Prestasjon` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `OktOvelse`
+--
+
+CREATE TABLE `OktOvelse` (
+  `OvelseID` int(11) NOT NULL,
+  `OktID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Ovelse`
+--
+
+CREATE TABLE `Ovelse` (
+  `OvelseID` int(11) NOT NULL,
+  `GruppeID` int(11) NOT NULL,
+  `Navn` varchar(30) NOT NULL,
+  `Beskrivelse` varchar(140) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Styrke`
+--
+
+CREATE TABLE `Styrke` (
+  `StyrkeID` int(11) NOT NULL,
+  `ØvelseID` int(11) NOT NULL,
+  `Belastning` int(11) NOT NULL,
+  `Antall repetisjoner` int(11) NOT NULL,
+  `Antall sett` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Utholdenhet`
+--
+
+CREATE TABLE `Utholdenhet` (
+  `UtholdenhetID` int(11) NOT NULL,
+  `OvingsID` int(11) NOT NULL,
+  `Varighet` int(11) NOT NULL,
+  `Puls` int(11) NOT NULL,
+  `GPS-koordinater` decimal(10,0) NOT NULL,
+  `Lengde i km` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `Gruppe`
+--
+ALTER TABLE `Gruppe`
+  ADD PRIMARY KEY (`GruppeID`);
+
+--
+-- Indexes for table `Kondisjon`
+--
+ALTER TABLE `Kondisjon`
+  ADD PRIMARY KEY (`KondisjonID`),
+  ADD KEY `OvelseID` (`OvelseID`);
+
+--
+-- Indexes for table `Okt`
+--
+ALTER TABLE `Okt`
+  ADD PRIMARY KEY (`OktID`);
+
+--
+-- Indexes for table `OktOvelse`
+--
+ALTER TABLE `OktOvelse`
+  ADD UNIQUE KEY `OktID` (`OktID`),
+  ADD KEY `OvelseID` (`OvelseID`);
+
+--
+-- Indexes for table `Ovelse`
+--
+ALTER TABLE `Ovelse`
+  ADD PRIMARY KEY (`OvelseID`),
+  ADD KEY `GruppeID` (`GruppeID`);
+
+--
+-- Indexes for table `Styrke`
+--
+ALTER TABLE `Styrke`
+  ADD PRIMARY KEY (`StyrkeID`),
+  ADD UNIQUE KEY `OvelseID` (`ØvelseID`);
+
+--
+-- Indexes for table `Utholdenhet`
+--
+ALTER TABLE `Utholdenhet`
+  ADD PRIMARY KEY (`UtholdenhetID`),
+  ADD KEY `OvingsID` (`OvingsID`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `Kondisjon`
+--
+ALTER TABLE `Kondisjon`
+  ADD CONSTRAINT `FK3` FOREIGN KEY (`OvelseID`) REFERENCES `Ovelse` (`OvelseID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `OktOvelse`
+--
+ALTER TABLE `OktOvelse`
+  ADD CONSTRAINT `FK4` FOREIGN KEY (`OktID`) REFERENCES `Okt` (`OktID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `Styrke`
+--
+ALTER TABLE `Styrke`
+  ADD CONSTRAINT `FK1` FOREIGN KEY (`ØvelseID`) REFERENCES `Ovelse` (`OvelseID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `Utholdenhet`
+--
+ALTER TABLE `Utholdenhet`
+  ADD CONSTRAINT `FK2` FOREIGN KEY (`OvingsID`) REFERENCES `Ovelse` (`OvelseID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
