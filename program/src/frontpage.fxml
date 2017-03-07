@@ -11,8 +11,8 @@
         <ButtonBar>
             <buttons>
                 <Button id="button" fx:id="addButton" alignment="CENTER" onAction="#handleAddButton" text="Ny økt" />
-                <Button id="button" fx:id="WeeksBestButton" onAction="#handleAddButton" prefHeight="27.0" prefWidth="222.0" text="Ukens beste økt" />
-                <Button id="button" fx:id="StatestikkButton" onAction="#handleAddButton" prefHeight="27.0" prefWidth="259.0" text="Statestikk for månden" />
+                <Button id="button" fx:id="WeeksBestButton" onAction="#handleWeeksBest" prefHeight="27.0" prefWidth="222.0" text="Ukens beste økt" />
+                <Button id="button" fx:id="StatestikkButton" onAction="#handleStatestikk" prefHeight="27.0" prefWidth="259.0" text="Statestikk for månden" />
             </buttons>
         </ButtonBar>
     </HBox>
