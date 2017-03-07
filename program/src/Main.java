@@ -8,10 +8,16 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("layout.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("frontpage.fxml"));
         primaryStage.setTitle("trenings dagbok");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        Scene scene =  new Scene(root, 670, 500);
+        String css = this.getClass().getResource("./css/buttonFrontPage.css").toExternalForm();
+        scene.getStylesheets().add(css);
+
+
+        primaryStage.setScene(scene);
         primaryStage.show();
+
     }
 
 
