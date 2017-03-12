@@ -10,7 +10,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("frontpage.fxml"));
         primaryStage.setTitle("Treningsdagbok");
-        Scene scene =  new Scene(root, 670, 500);
+        Scene scene =  new Scene(root, 581, 400);
         String css = this.getClass().getResource("./css/buttonFrontPage.css").toExternalForm();
         scene.getStylesheets().add(css);
 

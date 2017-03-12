@@ -58,6 +58,8 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb){
         dc = new DBConnect();
     }
+
+    //Henter info om tidligere økter fra databasen når man trykker på hent tidligere økter"
     public void handleHent(ActionEvent actionEvent) {
         try{
             Connection conn = dc.Connect();
@@ -66,11 +68,12 @@ public class Controller implements Initializable {
             while(rs.next()){
                 data.add(new HentInfo(rs.getString(1), rs.getString(2),
                         rs.getString(3), rs.getString(4), rs.getString(5),
-                        rs.getString(6), rs.getString(7), rs.getString(7)));
+                        rs.getString(6), rs.getString(7), rs.getString(8)));
             }
         }catch(SQLException ex){
             System.err.println("u fkd up"+ex);
         }
+        //Setter verdier på tabellene i table-viewen til det den henter fra databasen
         tblID.setCellValueFactory(new PropertyValueFactory<>("ID"));
         tblDato.setCellValueFactory(new PropertyValueFactory<>("dato"));
         tblTid.setCellValueFactory(new PropertyValueFactory<>("tidspunkt"));

@@ -21,13 +21,9 @@ public class DBConnect {
 
 
     //login info
-    //static final String URL = "jdbc:mysql://mysql.stud.ntnu.no:3306/henrisor_69";
-    //static final String user = "henrisor_tdt4145";
-    //static final  String pass = "123";
-    String URL = "jdbc:mysql://localhost:3306/henrisor_69";
-    String user = "root";
-    String pass = "123";
-
+    static final String URL = "jdbc:mysql://mysql.stud.ntnu.no:3306/henrisor_69";
+    static final String user = "henrisor_tdt4145";
+    static final  String pass = "123";
 
     Connection conn = null;
     Statement stmt = null;
