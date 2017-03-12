@@ -1,4 +1,4 @@
-import database.Connect;
+import database.DBConnect;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 /**
  * Created by henri on 08.03.2017.
  */
-public class QueryTest extends Connect {
+public class QueryTest extends DBConnect {
 
     protected Connection conn() throws SQLException {
         return DriverManager.getConnection("jdbc:mysql://mysql.stud.ntnu.no:3306/henrisor_69", "henrisor_tdt4145", "123");

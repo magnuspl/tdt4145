@@ -17,7 +17,7 @@ import java.sql.Statement;
  * med disse to reglene sleper vi 50 metoder som vi leite igjennom
  * og kan heller korte det ned med å se på klasse navnet.
  */
-public class Connecting {
+public class DBConnect {
 
 
     //login info
@@ -40,10 +40,8 @@ public class Connecting {
             System.out.println("Connecting to database...");
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conn = DriverManager.getConnection(URL, user, pass);
+            stmt = conn.createStatement();
             return conn;
-
-        } catch (SQLException se) {
-            se.printStackTrace();
 
         } catch (Exception e) {
             e.printStackTrace();
