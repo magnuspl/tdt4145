@@ -62,7 +62,7 @@ public class Controller implements Initializable {
     //Henter info om tidligere økter fra databasen når man trykker på hent tidligere økter"
     public void handleHent(ActionEvent actionEvent) {
         try{
-            Connection conn = dc.Connect();
+            Connection conn = dc.getConn();
             data = FXCollections.observableArrayList();
             ResultSet rs = conn.createStatement().executeQuery("SELECT * from okt");
             while(rs.next()){

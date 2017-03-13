@@ -31,13 +31,13 @@ public class DBConnect {
 
 
     //når du oppreter klassen kobler den seg automatisk opp.
-    public Connection Connect() {
+    public DBConnect() {
         try {
             System.out.println("Connecting to database...");
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conn = DriverManager.getConnection(URL, user, pass);
             stmt = conn.createStatement();
-            return conn;
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,7 +46,11 @@ public class DBConnect {
         if (conn != null) {
             System.out.println("Connected to database");
         }
-        return null;
+
+    }
+
+    public Connection getConn(){
+        return conn;
     }
 
 
