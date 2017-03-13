@@ -38,6 +38,7 @@ public class Controller implements Initializable {
     @FXML protected void handleAddButton (ActionEvent event) {
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("nyOkt.fxml"));
+
             Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
@@ -45,11 +46,14 @@ public class Controller implements Initializable {
 
         } catch (IOException e) {
             System.out.println("Kunne ikke åpne shitn");
+            e.printStackTrace();
+
         }
 
     }
 
     @FXML protected void handleWeeksBest(ActionEvent actionEvent){
+
         try{
 
             data = FXCollections.observableArrayList();
@@ -66,6 +70,7 @@ public class Controller implements Initializable {
     }
     //Setter verdier på tabellene i table-viewen til det den henter fra databasen
     public void setValues(){
+
         tblID.setCellValueFactory(new PropertyValueFactory<>("ID"));
         tblDato.setCellValueFactory(new PropertyValueFactory<>("dato"));
         tblTid.setCellValueFactory(new PropertyValueFactory<>("tidspunkt"));
@@ -88,6 +93,7 @@ public class Controller implements Initializable {
 
     //Henter info om tidligere økter fra databasen når man trykker på hent tidligere økter"
     public void handleHent(ActionEvent actionEvent) {
+
         try{
             Connection conn = dc.getConn();
             data = FXCollections.observableArrayList();

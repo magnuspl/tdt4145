@@ -1,9 +1,12 @@
+import database.workout;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 /**
@@ -25,6 +28,19 @@ public class NyOktController implements Initializable {
     protected ComboBox<String> ovelser;
     @FXML
     protected Spinner<Integer> pers, pres;
+    @FXML
+    protected Text feilMessage;
+
+
+    LocalDate date = dato.getValue();
+    String time =  tidspunkt.getText();
+    int duration = Integer.parseInt(varighet_m.getText());
+    String note = notat.getText();
+    int perForm = (Integer) pers.getValue();
+    int prestasjon = (Integer) pres.getValue();
+    String air = luft.getText();
+    int tempS = Integer.parseInt(temp.getText());
+    String weather = vaer.getText();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -41,6 +57,15 @@ public class NyOktController implements Initializable {
     }
 
     public void OvelseValgt(ActionEvent actionEvent) {
+    }
+
+    public boolean checkFilds(){
+        if(!inneCheck.isSelected() && !inneCheck.isSelected()){
+            feilMessage.setText("FEIL");
+            return false;
+
+        }
+        return true;
     }
 
 
@@ -68,6 +93,17 @@ public class NyOktController implements Initializable {
     }
 
     public void regOkt(ActionEvent actionEvent) {
+        if(checkFilds()){
+            workout workout = new workout();
+            if(inneCheck.isSelected()){
+                workout.addOktInn(date, time, duration, note, perForm, prestasjon, air);
+            } else if(uteCheck.isSelected()){
+                workout.addOktOut(date, time, duration, note, perForm, prestasjon, tempS, weather);
+
+            }
+
+
+        }
 
     }
 }
