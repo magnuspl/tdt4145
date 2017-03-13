@@ -81,6 +81,16 @@ public class workout extends DBConnect{
 
     }
 
+    public static void main(String[] args) {
+        LocalDate test = LocalDate.now();
+
+
+        workout mw = new workout();
+        mw.addOktOut(test, "08:10:15", 30, "hei", 3, 4, 5,"sol");
+
+
+            }
+
 
 
 }
