@@ -25,6 +25,8 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
+
+
     private DBConnect dc;
     private ObservableList<HentInfo> data;
 
@@ -35,7 +37,7 @@ public class Controller implements Initializable {
     @FXML
     protected Button addButton, WeeksBestButton, StatistikkButton, btnTidlig;
 
-    @FXML protected void handleAddButton (ActionEvent event) {
+    @FXML protected void handleAddButton (ActionEvent actionEvent) {
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("nyOkt.fxml"));
 
@@ -45,8 +47,10 @@ public class Controller implements Initializable {
             stage.show();
 
         } catch (IOException e) {
+
             System.out.println("Kunne ikke åpne shitn");
             e.printStackTrace();
+
 
         }
 
@@ -57,7 +61,7 @@ public class Controller implements Initializable {
         try{
 
             data = FXCollections.observableArrayList();
-            ResultSet rs = dc.getConn().createStatement().executeQuery("SELECT * from Okt order by prestasjon DESC ");
+            ResultSet rs = dc.getConn().createStatement().executeQuery("SELECT * from Okt order by Prestasjon DESC ");
             while(rs.next()){
                 data.add(new HentInfo(rs.getString(1), rs.getString(2),
                         rs.getString(3), rs.getString(4), rs.getString(5),
@@ -107,8 +111,5 @@ public class Controller implements Initializable {
             System.err.println("u fkd up"+ex);
         }
         setValues();
-
-
-
     }
 }

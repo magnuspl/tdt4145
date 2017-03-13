@@ -1,10 +1,18 @@
 import database.workout;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+
 import javafx.scene.text.Text;
 
+import javafx.stage.Stage;
+
+
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -56,8 +64,7 @@ public class NyOktController implements Initializable {
         pres.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10, 5, 1));
     }
 
-    public void OvelseValgt(ActionEvent actionEvent) {
-    }
+
 
     public boolean checkFilds(){
         if(!inneCheck.isSelected() && !inneCheck.isSelected()){
@@ -93,6 +100,7 @@ public class NyOktController implements Initializable {
     }
 
     public void regOkt(ActionEvent actionEvent) {
+
         if(checkFilds()){
             workout workout = new workout();
             if(inneCheck.isSelected()){
@@ -105,5 +113,16 @@ public class NyOktController implements Initializable {
 
         }
 
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ovelse.fxml"));
+            Parent root1 = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.show();
+
+
+        } catch (IOException e) {
+            System.out.println("Kunne ikke åpne shitn");
+        }
     }
 }
