@@ -53,7 +53,7 @@ public class Controller implements Initializable {
         try{
             Connection conn = dc.Connect();
             data = FXCollections.observableArrayList();
-            ResultSet rs = conn.createStatement().executeQuery("SELECT * from okt order by prestasjon ASC ");
+            ResultSet rs = conn.createStatement().executeQuery("SELECT * from Okt order by prestasjon DESC ");
             while(rs.next()){
                 data.add(new HentInfo(rs.getString(1), rs.getString(2),
                         rs.getString(3), rs.getString(4), rs.getString(5),
@@ -91,7 +91,7 @@ public class Controller implements Initializable {
         try{
             Connection conn = dc.Connect();
             data = FXCollections.observableArrayList();
-            ResultSet rs = conn.createStatement().executeQuery("SELECT * from okt");
+            ResultSet rs = conn.createStatement().executeQuery("SELECT * from Okt");
             while(rs.next()){
                 data.add(new HentInfo(rs.getString(1), rs.getString(2),
                         rs.getString(3), rs.getString(4), rs.getString(5),
