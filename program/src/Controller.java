@@ -14,6 +14,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
+
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -47,11 +49,36 @@ public class Controller implements Initializable {
 
     }
 
-    @FXML protected void handleWeeksBest(Event event){
-
+    @FXML protected void handleWeeksBest(ActionEvent actionEvent){
+        try{
+            Connection conn = dc.Connect();
+            data = FXCollections.observableArrayList();
+            ResultSet rs = conn.createStatement().executeQuery("SELECT * from okt order by prestasjon ASC ");
+            while(rs.next()){
+                data.add(new HentInfo(rs.getString(1), rs.getString(2),
+                        rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getString(7), rs.getString(8)));
+            }
+        }catch(SQLException ex){
+            System.err.println("u fkd up"+ex);
+        }
+        setValues();
+    }
+    //Setter verdier på tabellene i table-viewen til det den henter fra databasen
+    public void setValues(){
+        tblID.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        tblDato.setCellValueFactory(new PropertyValueFactory<>("dato"));
+        tblTid.setCellValueFactory(new PropertyValueFactory<>("tidspunkt"));
+        tblVar.setCellValueFactory(new PropertyValueFactory<>("varighet"));
+        tblPers.setCellValueFactory(new PropertyValueFactory<>("personligf"));
+        tblPrest.setCellValueFactory(new PropertyValueFactory<>("prestasjon"));
+        tblIU.setCellValueFactory(new PropertyValueFactory<>("iu"));
+        tblNotat.setCellValueFactory(new PropertyValueFactory<>("notat"));
+        table.setItems(null);
+        table.setItems(data);
     }
 
-    @FXML protected void handleStatistikk(Event event){
+    @FXML protected void handleStatistikk(Event event) throws SQLException {
 
     }
 
@@ -73,18 +100,9 @@ public class Controller implements Initializable {
         }catch(SQLException ex){
             System.err.println("u fkd up"+ex);
         }
-        //Setter verdier på tabellene i table-viewen til det den henter fra databasen
-        tblID.setCellValueFactory(new PropertyValueFactory<>("ID"));
-        tblDato.setCellValueFactory(new PropertyValueFactory<>("dato"));
-        tblTid.setCellValueFactory(new PropertyValueFactory<>("tidspunkt"));
-        tblVar.setCellValueFactory(new PropertyValueFactory<>("varighet"));
-        tblPers.setCellValueFactory(new PropertyValueFactory<>("personligf"));
-        tblPrest.setCellValueFactory(new PropertyValueFactory<>("prestasjon"));
-        tblIU.setCellValueFactory(new PropertyValueFactory<>("iu"));
-        tblNotat.setCellValueFactory(new PropertyValueFactory<>("notat"));
+        setValues();
 
 
-        table.setItems(null);
-        table.setItems(data);
+
     }
 }

@@ -16,13 +16,11 @@ public class NyOktController implements Initializable {
     @FXML
     protected TextArea notat;
     @FXML
-    protected TextField temp, vaer, luft, varighet_t, varighet_m;
+    protected TextField tidspunkt, temp, vaer, luft, varighet_m;
     @FXML
     protected CheckBox inneCheck, uteCheck;
     @FXML
     protected DatePicker dato;
-    @FXML
-    protected ComboBox<String> time, min;
     @FXML
     protected ComboBox<String> ovelser;
     @FXML
@@ -30,8 +28,6 @@ public class NyOktController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        time.getItems().addAll("05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23");
-        min.getItems().addAll("00","15","30","45");
 
         //Noen testverdier
         ovelser.getItems().addAll("Markløft","Benkpress", "Squats", "Biceps curls");
@@ -46,6 +42,7 @@ public class NyOktController implements Initializable {
 
     public void OvelseValgt(ActionEvent actionEvent) {
     }
+
 
     public void uteCheck_changed(ActionEvent actionEvent) {
         if (uteCheck.isSelected()){
@@ -71,6 +68,6 @@ public class NyOktController implements Initializable {
     }
 
     public void regOkt(ActionEvent actionEvent) {
-        //Registrer økt i databasen
+
     }
 }
