@@ -1,22 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.112" fx:controller="Controller">
-    <HBox>
-        <ButtonBar>
-            <buttons>
-                <Button id="button" fx:id="addButton" alignment="CENTER" onAction="#handleAddButton" text="Ny økt" />
-                <Button id="button" fx:id="WeeksBestButton" onAction="#handleAddButton" prefHeight="27.0" prefWidth="222.0" text="Ukens beste økt" />
-                <Button id="button" fx:id="StatestikkButton" onAction="#handleAddButton" prefHeight="27.0" prefWidth="259.0" text="Statestikk for månden" />
-            </buttons>
-        </ButtonBar>
-    </HBox>
-
-    <Line endX="0" endY="50" layoutX="169.0" layoutY="171.0" startX="700" startY="50" />
-
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="581.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+   <children>
+      <ButtonBar layoutX="-22.0" layoutY="2.0" prefHeight="0.0" prefWidth="596.0">
+         <buttons>
+            <Button id="button" fx:id="addButton" alignment="CENTER" defaultButton="true" layoutX="-30.0" onAction="#handleAddButton" text="Ny økt" />
+            <Button id="button" fx:id="WeeksBestButton" onAction="#handleWeeksBest" prefHeight="27.0" prefWidth="222.0" text="Ukens beste økt" />
+            <Button id="button" fx:id="StatistikkButton" onAction="#handleStatistikk" prefHeight="27.0" prefWidth="259.0" text="Statistikk for måneden" />
+         </buttons>
+         <padding>
+            <Insets left="9.0" />
+         </padding>
+      </ButtonBar>
+      <TableView fx:id="table" layoutY="34.0" prefHeight="328.0" prefWidth="581.0">
+        <columns>
+            <TableColumn fx:id="tblID" prefWidth="33.0" text="ID" />
+            <TableColumn fx:id="tblDato" prefWidth="75.0" text="Dato" />
+            <TableColumn fx:id="tblTid" prefWidth="71.0" text="Tidspunkt" />
+            <TableColumn fx:id="tblVar" prefWidth="71.0" text="Varighet" />
+            <TableColumn fx:id="tblPers" prefWidth="88.0" text="Personlig form" />
+            <TableColumn fx:id="tblPrest" prefWidth="66.0" text="Prestasjon" />
+            <TableColumn fx:id="tblIU" prefWidth="56.0" text="Inne/ute" />
+            <TableColumn fx:id="tblNotat" prefWidth="120.0" text="Notat" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnTidlig" layoutX="21.0" layoutY="364.0" mnemonicParsing="false" onAction="#handleHent" text="Hent tidligere økter" />
+   </children>
+</AnchorPane>
