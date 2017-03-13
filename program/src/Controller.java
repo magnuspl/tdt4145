@@ -51,9 +51,9 @@ public class Controller implements Initializable {
 
     @FXML protected void handleWeeksBest(ActionEvent actionEvent){
         try{
-            Connection conn = dc.Connect();
+
             data = FXCollections.observableArrayList();
-            ResultSet rs = conn.createStatement().executeQuery("SELECT * from Okt order by prestasjon DESC ");
+            ResultSet rs = dc.getConn().createStatement().executeQuery("SELECT * from Okt order by prestasjon DESC ");
             while(rs.next()){
                 data.add(new HentInfo(rs.getString(1), rs.getString(2),
                         rs.getString(3), rs.getString(4), rs.getString(5),
