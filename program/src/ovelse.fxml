@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="271.0" prefWidth="533.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OvelseController">
+   <children>
+      <RadioButton fx:id="radStyrke" layoutX="40.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleStyrk" text="Styrke">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="radKond" layoutX="186.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleKond" text="Kondisjon">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="radUth" layoutX="349.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleUth" text="Utholdenhet">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </RadioButton>
+      <ComboBox fx:id="dropStyrke" disable="true" layoutX="24.0" layoutY="126.0" prefHeight="25.0" prefWidth="124.0" />
+      <ComboBox fx:id="dropKond" disable="true" layoutX="205.0" layoutY="126.0" prefHeight="25.0" prefWidth="124.0" />
+      <ComboBox fx:id="dropUth" disable="true" layoutX="372.0" layoutY="126.0" prefHeight="25.0" prefWidth="124.0" />
+   </children>
+</AnchorPane>
