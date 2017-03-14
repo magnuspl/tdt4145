@@ -14,7 +14,7 @@ public class OvelseController implements Initializable {
     @FXML
     protected Label kommentar;
     @FXML
-    protected TextField belastning, reps, sett, lengde;
+    protected TextField belastning, reps, sett, lengde, varig, puls;
     @FXML
     protected Button addOvelse;
     @FXML
@@ -36,12 +36,12 @@ public void enable(ComboBox en1, ComboBox en2){
     en1.setDisable(false);
     en2.setDisable(false);
 }
-public void kondisStyrkeDis(TextField txt1, TextField txt2, TextField txt3){
+public void kondisStyrkeEn(TextField txt1, TextField txt2, TextField txt3){
     txt1.setDisable(false);
     txt2.setDisable(false);
     txt3.setDisable(false);
 
-}public void kondisStyrkeEn(TextField txt1, TextField txt2, TextField txt3){
+}public void kondisStyrkeDis(TextField txt1, TextField txt2, TextField txt3){
         txt1.setDisable(true);
         txt2.setDisable(true);
         txt3.setDisable(true);
@@ -52,10 +52,10 @@ public void kondisStyrkeDis(TextField txt1, TextField txt2, TextField txt3){
         if(radStyrke.isSelected()){
             enable(dropStyrke, dropStyrkeAlt);
             disable(dropKond, dropUth, dropKondAlt, dropUthAlt);
-            kondisStyrkeDis(belastning, reps, sett);
+            kondisStyrkeEn(belastning, reps, sett);
         }else {
             dropStyrke.setDisable(true);
-            kondisStyrkeEn(belastning, reps, sett);
+            kondisStyrkeDis(belastning, reps, sett);
         }
     }
 
@@ -63,10 +63,10 @@ public void kondisStyrkeDis(TextField txt1, TextField txt2, TextField txt3){
         if(radKond.isSelected()){
             enable(dropKond, dropKondAlt);
             disable(dropStyrke, dropUth, dropStyrkeAlt, dropUthAlt);
-            kondisStyrkeDis(belastning, reps, sett);
+            kondisStyrkeEn(belastning, reps, sett);
         }else{
             dropKond.setDisable(true);
-            kondisStyrkeEn(belastning, reps, sett);
+            kondisStyrkeDis(belastning, reps, sett);
         }
     }
 
@@ -75,9 +75,13 @@ public void kondisStyrkeDis(TextField txt1, TextField txt2, TextField txt3){
             enable(dropUth, dropUthAlt);
             disable(dropStyrke, dropKond, dropStyrkeAlt, dropKondAlt);
             lengde.setDisable(false);
+            varig.setDisable(false);
+            puls.setDisable(false);
         }else{
             dropUth.setDisable(true);
             lengde.setDisable(true);
+            varig.setDisable(true);
+            varig.setDisable(true);
         }
     }
 

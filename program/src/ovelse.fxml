@@ -52,12 +52,12 @@
          </font>
       </Text>
       <TextField fx:id="sett" layoutX="160.0" layoutY="331.0" prefHeight="25.0" prefWidth="57.0" />
-      <Text disable="true" layoutX="310.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lengde i km">
+      <Text disable="true" layoutX="309.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lengde i km">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <TextField fx:id="lengde" disable="true" layoutX="400.0" layoutY="270.0" prefHeight="25.0" prefWidth="57.0" />
+      <TextField fx:id="lengde" disable="true" layoutX="398.0" layoutY="259.0" prefHeight="25.0" prefWidth="57.0" />
       <ComboBox fx:id="dropStyrkeAlt" layoutX="20.0" layoutY="120.0" prefHeight="25.0" prefWidth="124.0" />
       <ComboBox fx:id="dropKondAlt" disable="true" layoutX="174.0" layoutY="120.0" prefHeight="25.0" prefWidth="124.0" />
       <ComboBox fx:id="dropUthAlt" disable="true" layoutX="350.0" layoutY="120.0" prefHeight="25.0" prefWidth="124.0" />
@@ -69,5 +69,17 @@
       <Text layoutX="51.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Velg øvelse" />
       <Text layoutX="206.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Velg øvelse" />
       <Text layoutX="381.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Velg øvelse" />
+      <Text disable="true" layoutX="309.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Varighet">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text disable="true" layoutX="321.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Puls">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <TextField fx:id="varig" disable="true" layoutX="398.0" layoutY="293.0" prefHeight="25.0" prefWidth="57.0" />
+      <TextField fx:id="puls" disable="true" layoutX="398.0" layoutY="330.0" prefHeight="25.0" prefWidth="57.0" />
    </children>
 </AnchorPane>
