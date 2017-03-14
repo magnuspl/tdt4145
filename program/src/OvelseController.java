@@ -1,9 +1,7 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,39 +12,76 @@ import java.util.ResourceBundle;
 public class OvelseController implements Initializable {
 
     @FXML
-    protected ComboBox dropStyrke, dropKond, dropUth;
-
+    protected Label kommentar;
+    @FXML
+    protected TextField belastning, reps, sett, lengde, varig, puls;
+    @FXML
+    protected Button addOvelse;
+    @FXML
+    protected ComboBox dropStyrke, dropStyrkeAlt, dropKond,dropKondAlt, dropUth, dropUthAlt;
     @FXML
     protected RadioButton radStyrke, radKond, radUth;
 
-    final ToggleGroup group = new ToggleGroup();
 
 
+
+
+public void disable(ComboBox dis1,ComboBox dis2, ComboBox dis3, ComboBox dis4){
+    dis1.setDisable(true);
+    dis2.setDisable(true);
+    dis3.setDisable(true);
+    dis4.setDisable(true);
+}
+public void enable(ComboBox en1, ComboBox en2){
+    en1.setDisable(false);
+    en2.setDisable(false);
+}
+public void kondisStyrkeEn(TextField txt1, TextField txt2, TextField txt3){
+    txt1.setDisable(false);
+    txt2.setDisable(false);
+    txt3.setDisable(false);
+
+}public void kondisStyrkeDis(TextField txt1, TextField txt2, TextField txt3){
+        txt1.setDisable(true);
+        txt2.setDisable(true);
+        txt3.setDisable(true);
+    }
 
     public void handleStyrk(ActionEvent actionEvent) {
-        radStyrke.setToggleGroup(group);
+
         if(radStyrke.isSelected()){
-            dropStyrke.setDisable(false);
-        }else if (radKond.isSelected() || radUth.isSelected()){
+            enable(dropStyrke, dropStyrkeAlt);
+            disable(dropKond, dropUth, dropKondAlt, dropUthAlt);
+            kondisStyrkeEn(belastning, reps, sett);
+        }else {
             dropStyrke.setDisable(true);
+            kondisStyrkeDis(belastning, reps, sett);
         }
     }
 
     public void handleKond(ActionEvent actionEvent) {
-        radKond.setToggleGroup(group);
         if(radKond.isSelected()){
-            dropKond.setDisable(false);
-        }else if (radStyrke.isSelected() || radUth.isSelected()){
+            enable(dropKond, dropKondAlt);
+            disable(dropStyrke, dropUth, dropStyrkeAlt, dropUthAlt);
+            kondisStyrkeEn(belastning, reps, sett);
+        }else{
             dropKond.setDisable(true);
+            kondisStyrkeDis(belastning, reps, sett);
         }
     }
 
     public void handleUth(ActionEvent actionEvent) {
-        radUth.setToggleGroup(group);
         if(radUth.isSelected()){
-            dropUth.setDisable(false);
-        }else if (radStyrke.isSelected() || radKond.isSelected()){
+            enable(dropUth, dropUthAlt);
+            disable(dropStyrke, dropKond, dropStyrkeAlt, dropKondAlt);
+            lengde.setDisable(false);
+            varig.setDisable(false);
+            puls.setDisable(false);
+        }else{
             dropUth.setDisable(true);
+            lengde.setDisable(true);
+            varig.setDisable(true);
+            varig.setDisable(true);
         }
     }
 
@@ -57,8 +92,10 @@ public class OvelseController implements Initializable {
         //Noen testverdier
         dropStyrke.getItems().addAll("Markløft","Benkpress", "Squats", "Biceps curls");
         dropKond.getItems().addAll("Intervall", "Spurt", "Bakkeløp");
-        dropUth.getItems().addAll("Intervall", "10km rask jogg");
+        dropUth.getItems().addAll("Intervall", "10km hurtig jogg");
     }
 
+    public void handleAddOv(ActionEvent actionEvent) {
+    }
 }
 

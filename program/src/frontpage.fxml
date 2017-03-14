@@ -26,10 +26,10 @@
             <TableColumn fx:id="tblDato" prefWidth="75.0" text="Dato" />
             <TableColumn fx:id="tblTid" prefWidth="71.0" text="Tidspunkt" />
             <TableColumn fx:id="tblVar" prefWidth="71.0" text="Varighet" />
-            <TableColumn fx:id="tblPers" prefWidth="88.0" text="Personlig form" />
-            <TableColumn fx:id="tblPrest" prefWidth="66.0" text="Prestasjon" />
-            <TableColumn fx:id="tblIU" prefWidth="56.0" text="Inne/ute" />
-            <TableColumn fx:id="tblNotat" prefWidth="120.0" text="Notat" />
+            <TableColumn fx:id="tblPrest" prefWidth="63.0" text="Prestasjon" />
+            <TableColumn fx:id="tblNotat" prefWidth="88.0" text="Personlig form" />
+            <TableColumn fx:id="tblIU" prefWidth="63.0" text="Inne/ute" />
+            <TableColumn fx:id="tblPers" prefWidth="116.0" text="Notat" />
         </columns>
       </TableView>
 
