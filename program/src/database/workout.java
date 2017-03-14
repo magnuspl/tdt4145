@@ -114,7 +114,7 @@ public class workout extends DBConnect{
 
         workout mw = new workout();
         //mw.addOktOut(test, "08:10:15", 30, "hei", 3, 4, 5,"sol");
-        System.out.println(mw.getOktID(test, "08:10:15"));
+        //System.out.println(mw.getOktID(test, "08:10:15"));
 
 
             }
