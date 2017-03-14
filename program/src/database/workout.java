@@ -1,6 +1,7 @@
 package database;
 
 import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
@@ -81,12 +82,39 @@ public class workout extends DBConnect{
 
     }
 
+    public int getOktID(LocalDate date, String time){
+        Time timeSql = java.sql.Time.valueOf(time);
+        Date dateSql = Date.valueOf(date);
+        int OktID = -1;
+
+        try{
+            ResultSet data = stmt.executeQuery("SELECT * FROM Okt WHERE Okt.Dato = '"+dateSql+"' " +
+                    "and Okt.Tidspunkt = '"+timeSql+"'");
+            while(data.next()){
+                OktID = data.getInt("OktID");
+            }
+            return OktID;
+
+        } catch (SQLException se){
+            se.printStackTrace();
+
+        } catch (NullPointerException e){
+            e.printStackTrace();
+        }
+
+
+         return -1;
+    }
+
+
+
     public static void main(String[] args) {
         LocalDate test = LocalDate.now();
 
 
         workout mw = new workout();
-        mw.addOktOut(test, "08:10:15", 30, "hei", 3, 4, 5,"sol");
+        //mw.addOktOut(test, "08:10:15", 30, "hei", 3, 4, 5,"sol");
+        System.out.println(mw.getOktID(test, "08:10:15"));
 
 
             }
