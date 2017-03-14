@@ -1,5 +1,6 @@
 package database;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -61,6 +62,22 @@ public class ovelse extends DBConnect{
 
     }
 
+    public int getLastAddedOvingID(){
+        int id = -1;
+        try{
+            ResultSet data = stmt.executeQuery("SELECT OvelseID FROM Ovelse ORDER BY OvelseID DESC LIMIT 1");
+            while(data.next()) {
+                id = data.getInt("OvelseID");
+            }
+            return id;
+
+        } catch (SQLException se){
+            se.printStackTrace();
+        }
+
+        return id;
+    }
+
 
 
 
@@ -68,8 +85,9 @@ public class ovelse extends DBConnect{
     public static void main(String[] args) {
         ovelse e = new ovelse();
         //e.addKondis(10,10,10,15);
-        e.addStyrke(10,10,10,15);
+        //e.addStyrke(10,10,10,15);
        //e.addUtholdenhet(10,180,7, 15);
+        System.out.println(e.getLastAddedOvingID());
 
 
     }

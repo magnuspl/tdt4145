@@ -1,3 +1,4 @@
+import database.ovelse;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,8 +23,118 @@ public class OvelseController implements Initializable {
     @FXML
     protected RadioButton radStyrke, radKond, radUth;
 
+    //Validering
+    boolean valBel = false;
+    boolean valRep = false;
+    boolean valSet = false;
+    boolean valLen = false;
+    boolean valDur = false;
+    boolean valHb = false;
+
+    int bel;
+    int rep;
+    int set;
+    int len;
+    int dur;
+    int hb;
 
 
+    private void valBel(){
+        try{
+            bel = Integer.parseInt(belastning.getText());
+            System.out.println("Bel: OK ");
+            valBel = true;
+
+        } catch(Exception e){
+            System.out.println("Bel: FEIL ");
+            e.printStackTrace();
+        }
+    }
+
+    private void valRep(){
+        try{
+            rep = Integer.parseInt(reps.getText());
+            System.out.println("Rep: OK ");
+            valRep = true;
+
+        } catch(Exception e){
+            System.out.println("Rep: FEIL ");
+            e.printStackTrace();
+        }
+    }
+
+    private void valSet(){
+        try{
+            set = Integer.parseInt(sett.getText());
+            System.out.println("set: OK ");
+            valSet = true;
+
+        } catch(Exception e){
+            System.out.println("set: FEIL ");
+            e.printStackTrace();
+        }
+    }
+
+    private void valLen(){
+        try{
+            len = Integer.parseInt(lengde.getText());
+            System.out.println("Len: OK ");
+            valLen = true;
+
+        } catch(Exception e){
+            System.out.println("Len: FEIL ");
+            e.printStackTrace();
+        }
+    }
+
+    private void valDur(){
+        try{
+            dur = Integer.parseInt(varig.getText());
+            System.out.println("Var: OK ");
+            valDur = true;
+
+        } catch(Exception e){
+            System.out.println("Var: FEIL ");
+            e.printStackTrace();
+        }
+    }
+
+    private void valHb(){
+        try{
+            hb = Integer.parseInt(belastning.getText());
+            System.out.println("HB: OK ");
+            valHb = true;
+
+        } catch(Exception e){
+            System.out.println("HB: FEIL ");
+            e.printStackTrace();
+        }
+    }
+
+    private boolean validation(){
+        if(radStyrke.isSelected() || radKond.isSelected()){
+            valBel();
+            valRep();
+            valSet();
+        } else if(radUth.isSelected()){
+            valLen();
+            valDur();
+            valHb();
+
+        }
+
+
+
+        if(valBel && valRep && valSet && (radStyrke.isSelected() || radKond.isSelected())){
+            return true;
+
+        } else if(valDur && valHb && valLen && radUth.isSelected())
+            return true;
+
+
+        return false;
+
+    }
 
 
 public void disable(ComboBox dis1,ComboBox dis2, ComboBox dis3, ComboBox dis4){
@@ -95,7 +206,28 @@ public void kondisStyrkeEn(TextField txt1, TextField txt2, TextField txt3){
         dropUth.getItems().addAll("Intervall", "10km hurtig jogg");
     }
 
+    @FXML
     public void handleAddOv(ActionEvent actionEvent) {
+
+        if(validation()){
+            ovelse ov = new ovelse();
+            //kobler det opp mot siste ovelse som ble lagt til, hvis oelse betyr eks benk, så
+            //må tanke gangen endres.
+            // da trengs get metode som henter oving etter navn med LIMIT 1
+
+            int ovId = ov.getLastAddedOvingID();
+            if(radStyrke.isSelected()){
+                ov.addStyrke(bel, rep, set, ovId);
+            } else if (radKond.isSelected()){
+                ov.addKondis(bel, rep, set, ovId);
+            }else if (radUth.isSelected()){
+                ov.addUtholdenhet(dur, hb, len, ovId);
+            }
+            ov.close();
+
+
+
+        }
     }
 }
 
