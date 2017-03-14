@@ -41,12 +41,56 @@ public class workout extends DBConnect{
 
     }
 
-    public static void main(String[] args) {
-        LocalDate date = LocalDate.now();
+    public void addOktInn(LocalDate date, String time, int duration, String note, int personligForm, int prestasjon,
+                        String AirCondition){
+
+        Time timeSql = java.sql.Time.valueOf(time);
+        Date dateSql = Date.valueOf(date);
 
 
-        workout test = new workout();
-        test.addOkt(date, "17:30:00",60, "formen var bra og fullførte 10km" +
-                " fortere en planlagt, og hadde mer energi til overs.", 3, 2, false, 1, "regn", "");
+
+        try {
+            stmt = conn.createStatement();
+            stmt.executeUpdate("INSERT INTO Okt(Dato, Tidspunkt, Varighet, note, PersonligForm, Prestasjon," +
+                    " Inndors,  AirCondition) VALUES('"+dateSql+"', '"+timeSql+"', '"+duration+"', '"+note+"'" +
+                    ", '"+personligForm+"', '"+prestasjon+"', '"+1+"', '"+AirCondition+"')");
+            System.out.println("okt added");
+        } catch( SQLException se){
+            se.printStackTrace();
+        }
+
     }
+
+    public void addOktOut(LocalDate date, String time, int duration, String note, int personligForm, int prestasjon,
+                        int temp, String weather){
+
+        Time timeSql = java.sql.Time.valueOf(time);
+        Date dateSql = Date.valueOf(date);
+
+
+
+        try {
+            stmt = conn.createStatement();
+            stmt.executeUpdate("INSERT INTO Okt(Dato, Tidspunkt, Varighet, note, PersonligForm, Prestasjon," +
+                    " Inndors, Temp, Weather) VALUES('"+dateSql+"', '"+timeSql+"', '"+duration+"', '"+note+"'" +
+                    ", '"+personligForm+"', '"+prestasjon+"', '"+0+"', '"+temp+"', '"+weather+"')");
+            System.out.println("okt added");
+        } catch( SQLException se){
+            se.printStackTrace();
+        }
+
+    }
+
+    public static void main(String[] args) {
+        LocalDate test = LocalDate.now();
+
+
+        workout mw = new workout();
+        mw.addOktOut(test, "08:10:15", 30, "hei", 3, 4, 5,"sol");
+
+
+            }
+
+
+
 }
