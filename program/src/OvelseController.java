@@ -1,4 +1,6 @@
+import database.oktOvelse;
 import database.ovelse;
+import database.workout;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -211,21 +213,30 @@ public void kondisStyrkeEn(TextField txt1, TextField txt2, TextField txt3){
 
         if(validation()){
             ovelse ov = new ovelse();
+            workout wo = new workout();
+            oktOvelse oo = new oktOvelse();
 
+            int woId = wo.getLastAddedOkt();
 
 
             // TODO endre XXX til navne som blir hentet fra skjemaet
-            // TODO annd oktovelse etter slik ovelsen blir kbolet opp mot økten
+
+
             if(radStyrke.isSelected()){
                 int ovId = ov.getIdOvelseOnNameAndType("XXX", "styrke");
                 ov.addStyrke(bel, rep, set, ovId);
+                oo.addOktOvelse(ovId,woId);
             } else if (radKond.isSelected()){
                 int ovId = ov.getIdOvelseOnNameAndType("XXX", "kondisjon");
                 ov.addKondis(bel, rep, set, ovId);
+                oo.addOktOvelse(ovId,woId);
             }else if (radUth.isSelected()){
                 int ovId = ov.getIdOvelseOnNameAndType("XXX", "utholdenhet");
                 ov.addUtholdenhet(dur, hb, len, ovId);
+                oo.addOktOvelse(ovId,woId);
+
             }
+
 
 
             ov.close();
