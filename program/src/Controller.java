@@ -88,7 +88,7 @@ public class Controller implements Initializable {
     }
 
     @FXML protected void handleStatistikk(Event event) throws SQLException {
-
+            
     }
 
     public void initialize(URL url, ResourceBundle rb){
