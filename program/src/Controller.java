@@ -14,7 +14,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
-
 import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
@@ -45,11 +44,14 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.show();
+            Stage stage1 = (Stage) addButton.getScene().getWindow();
+            stage1.close();
 
         } catch (IOException e) {
 
             System.out.println("Kunne ikke åpne shitn");
             e.printStackTrace();
+
 
 
         }
@@ -101,7 +103,7 @@ public class Controller implements Initializable {
         try{
             Connection conn = dc.getConn();
             data = FXCollections.observableArrayList();
-            ResultSet rs = conn.createStatement().executeQuery("SELECT * from Okt");
+            ResultSet rs = conn.createStatement().executeQuery("SELECT * from Okt order by OktID DESC");
             while(rs.next()){
                 data.add(new HentInfo(rs.getString(1), rs.getString(2),
                         rs.getString(3), rs.getString(4), rs.getString(5),
