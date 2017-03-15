@@ -14,13 +14,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 /**
  * Created by henri on 10.03.2017.
  */
-public class NyOktController implements Initializable {
+public class NyOktController extends OvelseController implements Initializable {
 
     @FXML
     protected Button registrer;
@@ -40,20 +41,18 @@ public class NyOktController implements Initializable {
     protected Text feilMessage;
 
 
+    LocalDate date;
+    String time;
+    int duration;
+    String note;
+    int perForm;
+    int prestasjon;
+    String air;
+    int tempS;
+    String weather;
 
 
-        LocalDate date;
-        String time;
-        int duration;
-        String note;
-        int perForm;
-        int prestasjon;
-        String air;
-        int tempS;
-        String weather;
-
-
-        //validering
+    //validering
     boolean valDate = false;
     boolean valTime = false;
     boolean valDuration = false;
@@ -65,89 +64,86 @@ public class NyOktController implements Initializable {
     boolean valWeather = false;
 
 
-
-
-
-    private void validateDate(){
-        try{
-            date =dato.getValue();
+    private void validateDate() {
+        try {
+            date = dato.getValue();
             valDate = true;
             System.out.println("date: OK " + date);
 
-        } catch(Exception e){
+        } catch (Exception e) {
             System.out.println("problem med date");
 
         }
     }
 
-    private void validateTime(){
-        try{
+    private void validateTime() {
+        try {
             time = tidspunkt.getText();
             String[] time2 = time.split(":");
-            if(time2.length == 3){
+            if (time2.length == 3) {
                 int t1 = Integer.parseInt(time2[0]);
                 int t2 = Integer.parseInt(time2[1]);
                 int t3 = Integer.parseInt(time2[2]);
-                if(t1 >= 0 && t2 >= 0 && t3 >= 0){
+                if (t1 >= 0 && t2 >= 0 && t3 >= 0) {
                     valTime = true;
                 }
             }
             System.out.println("Time: OK " + time);
 
-        } catch(Exception e){
+        } catch (Exception e) {
             System.out.println("problemer med tid");
         }
     }
 
-    public void validateDuration(){
+    public void validateDuration() {
         try {
             duration = Integer.parseInt(varighet_m.getText());
             valDuration = true;
-            if(duration > 0){
+            if (duration > 0) {
                 valDuration = true;
             }
             System.out.println("Duration: OK " + duration);
 
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Feil med Duration");
 
         }
 
     }
 
-    public void validateNote(){
+    public void validateNote() {
         try {
             note = notat.getText();
             valNote = true;
             System.out.println("Note: OK " + note);
 
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Feil med Note");
 
         }
 
     }
 
-    public void validatePerForm(){
+    public void validatePerForm() {
         try {
             perForm = (Integer) pers.getValue();
             valPerForm = true;
             System.out.println("PerForm: OK " + perForm);
 
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Feil med perForm");
 
         }
 
     }
 
-    public void validatePrestasjon(){
+    public void validatePrestasjon() {
         try {
             prestasjon = (Integer) pres.getValue();
             valPrestasjon = true;
             System.out.println("Prestasjon: OK " + prestasjon);
 
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Feil med presentasjon");
 
         }
@@ -155,13 +151,13 @@ public class NyOktController implements Initializable {
     }
 
 
-    public void validateAir(){
+    public void validateAir() {
         try {
             air = luft.getText();
             valAir = true;
             System.out.println("Air: OK " + air);
 
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Feil med air");
 
         }
@@ -169,35 +165,35 @@ public class NyOktController implements Initializable {
     }
 
 
-    public void validateTempS(){
+    public void validateTempS() {
         try {
             tempS = Integer.parseInt(temp.getText());
             valtempS = true;
             System.out.println("Teampratur: OK " + tempS);
 
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Feil med temp");
 
         }
 
     }
 
-    public void validateWeather(){
+    public void validateWeather() {
         try {
             weather = vaer.getText();
             valWeather = true;
             System.out.println("Weather: OK " + weather);
 
 
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Feil med Weather");
 
         }
 
     }
 
-    public boolean checkFilds(){
-        if(uteCheck.isSelected() || inneCheck.isSelected()){
+    public boolean checkFilds() {
+        if (uteCheck.isSelected() || inneCheck.isSelected()) {
             System.out.println("Check filds: OK");
             return true;
 
@@ -206,7 +202,7 @@ public class NyOktController implements Initializable {
         return false;
     }
 
-    public boolean validate(){
+    public boolean validate() {
         validateDate();
         validateTime();
         validateDuration();
@@ -217,12 +213,12 @@ public class NyOktController implements Initializable {
         validateTempS();
         validateWeather();
 
-        if(valDate && valTime && valDuration && valNote && valPerForm && valPrestasjon && checkFilds()){
-            if(inneCheck.isSelected() && valAir){
+        if (valDate && valTime && valDuration && valNote && valPerForm && valPrestasjon && checkFilds()) {
+            if (inneCheck.isSelected() && valAir) {
                 feilMessage.setText("");
                 return true;
 
-            } else if (uteCheck.isSelected() && valWeather && valtempS){
+            } else if (uteCheck.isSelected() && valWeather && valtempS) {
                 feilMessage.setText("");
                 return true;
             }
@@ -235,15 +231,11 @@ public class NyOktController implements Initializable {
     }
 
 
-
-
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         //Noen testverdier
-        ovelser.getItems().addAll("Markløft","Benkpress", "Squats", "Biceps curls");
+        ovelser.getItems().addAll("Markløft", "Benkpress", "Squats", "Biceps curls");
 
         vaer.setDisable(true);
         temp.setDisable(true);
@@ -254,34 +246,31 @@ public class NyOktController implements Initializable {
     }
 
 
-
-
-
-@FXML
+    @FXML
     public void uteCheck_changed(ActionEvent actionEvent) {
-        if (uteCheck.isSelected()){
+        if (uteCheck.isSelected()) {
             temp.setDisable(false);
             vaer.setDisable(false);
-        }
-        else{
+        } else {
             temp.setDisable(true);
             vaer.setDisable(true);
         }
     }
-@FXML
+
+    @FXML
     public void inneCheck_changed(ActionEvent actionEvent) {
-        if(inneCheck.isSelected()){
+        if (inneCheck.isSelected()) {
             luft.setDisable(false);
-        }
-        else{
+        } else {
             luft.setDisable(true);
         }
     }
-@FXML
+
+    @FXML
     public void valgt_ovelse(ActionEvent actionEvent) {
     }
 
-@FXML
+    @FXML
     public void regOkt(ActionEvent actionEvent) {
 
 
@@ -291,7 +280,7 @@ public class NyOktController implements Initializable {
                 try {
                     workout.addOktInn(date, time, duration, note, perForm, prestasjon, air);
                     workout.close();
-                } catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             } else if (uteCheck.isSelected()) {
@@ -307,6 +296,8 @@ public class NyOktController implements Initializable {
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root1));
                 stage.show();
+                Stage stage1 = (Stage) registrer.getScene().getWindow();
+                stage1.close();
 
 
             } catch (IOException e) {

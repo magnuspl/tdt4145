@@ -81,5 +81,6 @@
       </Text>
       <TextField fx:id="varig" disable="true" layoutX="398.0" layoutY="293.0" prefHeight="25.0" prefWidth="57.0" />
       <TextField fx:id="puls" disable="true" layoutX="398.0" layoutY="330.0" prefHeight="25.0" prefWidth="57.0" />
+      <Button fx:id="btnLukk" layoutX="385.0" layoutY="378.0" mnemonicParsing="false" onAction="#handleLukk" text="Lukk" />
    </children>
 </AnchorPane>
