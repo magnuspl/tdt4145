@@ -1,10 +1,19 @@
+import database.workout;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
+import javax.xml.transform.Result;
 import java.net.URL;
+import java.sql.*;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by henri on 13.03.2017.
@@ -16,13 +25,34 @@ public class OvelseController implements Initializable {
     @FXML
     protected TextField belastning, reps, sett, lengde, varig, puls;
     @FXML
-    protected Button addOvelse;
+    protected Button addOvelse, btnLukk;
     @FXML
     protected ComboBox dropStyrke, dropStyrkeAlt, dropKond,dropKondAlt, dropUth, dropUthAlt;
     @FXML
     protected RadioButton radStyrke, radKond, radUth;
 
+    Connection conn;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    final ObservableList options = FXCollections.observableArrayList();
 
+    public ObservableList<String> loadDDL() throws SQLException{
+        String query = "SELECT * FROM Okt";
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        ObservableList<String> myList = FXCollections.observableArrayList();
+        int col = rs.getMetaData().getColumnCount();
+        while(rs.next()){
+            for (int i=2; i <= col; i++){
+                myList.add(rs.getString(i));
+            }
+        }
+
+        conn.close();
+        myList.sorted();
+        myList.add(0, "Alle");
+        return myList;
+    }
 
 
 
@@ -86,16 +116,55 @@ public void kondisStyrkeEn(TextField txt1, TextField txt2, TextField txt3){
     }
 
 
+    public void fillcombobox(ComboBox box, String str){
+        try {
+            Statement stmt;
+            conn = DriverManager.getConnection("jdbc:mysql://mysql.stud.ntnu.no:3306/henrisor_69","henrisor_tdt4145","123");
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(str);
+            while(rs.next())
+            {
+                box.getItems().addAll(rs.getString(1));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        String queryS = "select Navn from Ovelse WHERE type='styrke'";
+        String queryK = "select navn from Ovelse where type='kondisjon'";
+        String queryU = "select navn from Ovelse where type='utholdenhet'";
+        fillcombobox(dropStyrke,queryS);
+        fillcombobox(dropKond, queryK);
+        fillcombobox(dropUth, queryU);
+        kommentar.setText("skal vi ha kommentarer her?");
+    }
 
-        //Noen testverdier
-        dropStyrke.getItems().addAll("Markløft","Benkpress", "Squats", "Biceps curls");
-        dropKond.getItems().addAll("Intervall", "Spurt", "Bakkeløp");
-        dropUth.getItems().addAll("Intervall", "10km hurtig jogg");
+    public void getShit(ComboBox cb){
+        String varName = (String)cb.getValue();
+        System.out.println(varName);
+
     }
 
     public void handleAddOv(ActionEvent actionEvent) {
+        getShit(dropStyrke);
+        getShit(dropKond);
+        getShit(dropUth);
+        System.out.println("Antall kg: "+belastning.getText());
+        System.out.println("Antall reps "+reps.getText());
+        System.out.println("Antall sett: "+sett.getText());
+        System.out.println("Puls: "+puls.getText());
+        System.out.println("GPS: "+varig.getText());
+        System.out.println("Lengde : "+lengde.getText());
+    }
+
+    public void handleLukk(ActionEvent actionEvent) {
+    Stage stage = (Stage) btnLukk.getScene().getWindow();
+    stage.close();
     }
 }
 
