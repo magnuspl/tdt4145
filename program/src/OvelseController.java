@@ -211,18 +211,23 @@ public void kondisStyrkeEn(TextField txt1, TextField txt2, TextField txt3){
 
         if(validation()){
             ovelse ov = new ovelse();
-            //kobler det opp mot siste ovelse som ble lagt til, hvis oelse betyr eks benk, så
-            //må tanke gangen endres.
-            // da trengs get metode som henter oving etter navn med LIMIT 1
 
-            int ovId = ov.getLastAddedOvingID();
+
+
+            // TODO endre XXX til navne som blir hentet fra skjemaet
+            // TODO annd oktovelse etter slik ovelsen blir kbolet opp mot økten
             if(radStyrke.isSelected()){
+                int ovId = ov.getIdOvelseOnNameAndType("XXX", "styrke");
                 ov.addStyrke(bel, rep, set, ovId);
             } else if (radKond.isSelected()){
+                int ovId = ov.getIdOvelseOnNameAndType("XXX", "kondisjon");
                 ov.addKondis(bel, rep, set, ovId);
             }else if (radUth.isSelected()){
+                int ovId = ov.getIdOvelseOnNameAndType("XXX", "utholdenhet");
                 ov.addUtholdenhet(dur, hb, len, ovId);
             }
+
+
             ov.close();
 
 
