@@ -118,7 +118,7 @@ public class OvelseController implements Initializable {
 
     private void valHb() {
         try {
-            hb = Integer.parseInt(belastning.getText());
+            hb = Integer.parseInt(puls.getText());
             System.out.println("HB: OK ");
             valHb = true;
 
@@ -329,14 +329,25 @@ public class OvelseController implements Initializable {
                     int ovId = ov.getIdOvelseOnNameAndType(type, "styrke");
                     ov.addStyrke(bel, rep, set, ovId);
                     oo.addOktOvelse(ovId, woId);
+                    belastning.setText("");
+                    reps.setText("");
+                    sett.setText("");
+
+
                 } else if (radKond.isSelected()) {
                     int ovId = ov.getIdOvelseOnNameAndType(type, "kondisjon");
                     ov.addKondis(bel, rep, set, ovId);
                     oo.addOktOvelse(ovId, woId);
+                    belastning.setText("");
+                    reps.setText("");
+                    sett.setText("");
                 } else if (radUth.isSelected()) {
                     int ovId = ov.getIdOvelseOnNameAndType(type, "utholdenhet");
                     ov.addUtholdenhet(dur, hb, len, ovId);
                     oo.addOktOvelse(ovId, woId);
+                    varig.setText("");
+                    puls.setText("");
+                    lengde.setText("");
 
                 }
 
