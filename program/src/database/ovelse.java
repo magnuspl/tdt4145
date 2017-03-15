@@ -98,20 +98,6 @@ public class ovelse extends DBConnect{
 
 
 
-    public static void main(String[] args) {
-        ovelse e = new ovelse();
-        //e.addKondis(10,10,10,15);
-        //e.addStyrke(10,10,10,15);
-       //e.addUtholdenhet(10,180,7, 15);
-        //System.out.println(e.getIdOvelseOnNameAndType("markløft", "styrke"));
-        //e.addOvelse("Benkpres", "Viktig å spenne kjerne muskelaturen og presse benna ned i baken", "styrke");
-
-
-        e.close();
-
-
-
-    }
 
 
 

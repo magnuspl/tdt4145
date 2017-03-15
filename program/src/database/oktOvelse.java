@@ -15,11 +15,10 @@ public class oktOvelse extends DBConnect {
     public void addOktOvelse(int OvelseId, int OktId) {
         try {
 
-            //TODO fiks denne slik den virker og kole den opp i Ovelse kontroller
-            // må jobbe oss rundt constrainen
-            // se link: http://stackoverflow.com/questions/1997998/insert-data-into-tables-linked-by-foreign-key
             stmt = conn.createStatement();
-            stmt.executeUpdate("INSERT INTO OktOvelse VALUES('" + OvelseId + "', '" + OktId + "') ");
+            stmt.executeUpdate("INSERT INTO OktOvelse VALUES(" +
+                    "(SELECT OvelseID FROM Ovelse WHERE Ovelse.OvelseID = '"+OvelseId+"')," +
+                    "(SELECT  OktID FROM Okt WHERE Okt.OktID = '"+OktId+"')) ");
             System.out.println("OktOvelse added");
 
 
@@ -30,12 +29,6 @@ public class oktOvelse extends DBConnect {
         }
     }
 
-    public static void main(String[] args) {
-        oktOvelse e = new oktOvelse();
-        e.addOktOvelse(18,17);
 
-
-
-    }
 }
 
