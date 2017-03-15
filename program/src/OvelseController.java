@@ -37,6 +37,7 @@ public class OvelseController implements Initializable {
     boolean valDur = false;
     boolean valHb = false;
 
+
     int bel;
     int rep;
     int set;
@@ -142,6 +143,8 @@ public class OvelseController implements Initializable {
     }
 
 
+
+
     public void disable(ComboBox dis1, ComboBox dis2, ComboBox dis3, ComboBox dis4) {
         dis1.setDisable(true);
         dis2.setDisable(true);
@@ -245,6 +248,7 @@ public class OvelseController implements Initializable {
     public void handleAddOv(ActionEvent actionEvent) {
 
 
+
         if (validation()) {
             ovelse ov = new ovelse();
 
@@ -258,20 +262,21 @@ public class OvelseController implements Initializable {
                 int ovId = ov.getIdOvelseOnNameAndType("XXX", "kondisjon");
                 ov.addKondis(bel, rep, set, ovId);
             } else if (radUth.isSelected()) {
-                int ovId = ov.getIdOvelseOnNameAndType("XXX", "utholdenhet");
-                ov.addUtholdenhet(dur, hb, len, ovId);
+                        int ovId = ov.getIdOvelseOnNameAndType("XXX", "utholdenhet");
+                        ov.addUtholdenhet(dur, hb, len, ovId);
+                    }
+
+
+                    ov.close();
+
+
+                }
             }
 
-
-            ov.close();
-
+        public void handleLukk (ActionEvent actionEvent){
+            Stage stage = (Stage) btnLukk.getScene().getWindow();
+            stage.close();
 
         }
     }
-
-    public void handleLukk(ActionEvent actionEvent) {
-        Stage stage = (Stage) btnLukk.getScene().getWindow();
-        stage.close();
-    }
-}
 
