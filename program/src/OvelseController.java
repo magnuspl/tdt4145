@@ -27,9 +27,10 @@ public class OvelseController implements Initializable {
     @FXML
     protected Button addOvelse, btnLukk;
     @FXML
-    protected ComboBox dropStyrke, dropStyrkeAlt, dropKond, dropKondAlt, dropUth, dropUthAlt;
+    protected ComboBox<String> dropStyrke, dropStyrkeAlt, dropKond, dropKondAlt, dropUth, dropUthAlt;
     @FXML
     protected RadioButton radStyrke, radKond, radUth;
+
 
     //Validering
     boolean valBel = false;
@@ -38,6 +39,9 @@ public class OvelseController implements Initializable {
     boolean valLen = false;
     boolean valDur = false;
     boolean valHb = false;
+    boolean valdropS = false;
+    boolean valdropK = false;
+    boolean valdropU = false;
 
 
     int bel;
@@ -46,6 +50,10 @@ public class OvelseController implements Initializable {
     int len;
     int dur;
     int hb;
+
+
+    String type;
+
 
 
     private void valBel() {
@@ -120,24 +128,80 @@ public class OvelseController implements Initializable {
         }
     }
 
+
+    private void valdropS(){
+        try {
+            if(radStyrke.isSelected()){
+                type = dropStyrke.getValue();
+                valdropS = true;
+
+            }
+
+        } catch(Exception e){
+            System.out.println("problemer med dropS");
+            e.printStackTrace();
+
+        }
+    }
+
+    private void valdropK(){
+        try {
+            if(radKond.isSelected()) {
+                type = dropKond.getValue();
+                valdropK = true;
+            }
+
+        } catch(Exception e){
+            System.out.println("problemer med dropK");
+            e.printStackTrace();
+
+        }
+    }
+
+    private void valdropU(){
+        try {
+            if(radUth.isSelected()){
+                type = dropUth.getValue();
+                valdropU = true;
+            }
+
+        } catch(Exception e){
+            System.out.println("problemer med dropS");
+            e.printStackTrace();
+
+        }
+    }
+
     private boolean validation() {
-        if (radStyrke.isSelected() || radKond.isSelected()) {
+        if (radStyrke.isSelected()) {
             valBel();
             valRep();
             valSet();
+            valdropS();
         } else if (radUth.isSelected()) {
             valLen();
             valDur();
             valHb();
+            valdropU();
+
+        } else if(radKond.isSelected()){
+            valBel();
+            valRep();
+            valSet();
+            valdropK();
 
         }
 
 
-        if (valBel && valRep && valSet && (radStyrke.isSelected() || radKond.isSelected())) {
+        if (valBel && valRep && valSet && valdropS && radStyrke.isSelected()) {
             return true;
 
-        } else if (valDur && valHb && valLen && radUth.isSelected())
+        } else if (valDur && valHb && valLen && valdropU && radUth.isSelected()) {
             return true;
+        } else if (valBel && valRep && valSet && valdropK && radKond.isSelected()){
+            return true;
+        }
+
 
 
         return false;
@@ -259,19 +323,18 @@ public class OvelseController implements Initializable {
             int woId = wo.getLastAddedOkt();
 
             if (validation()) {
-                // TODO endre XXX til navne som blir hentet fra skjemaet
 
 
                 if (radStyrke.isSelected()) {
-                    int ovId = ov.getIdOvelseOnNameAndType("XXX", "styrke");
+                    int ovId = ov.getIdOvelseOnNameAndType(type, "styrke");
                     ov.addStyrke(bel, rep, set, ovId);
                     oo.addOktOvelse(ovId, woId);
                 } else if (radKond.isSelected()) {
-                    int ovId = ov.getIdOvelseOnNameAndType("XXX", "kondisjon");
+                    int ovId = ov.getIdOvelseOnNameAndType(type, "kondisjon");
                     ov.addKondis(bel, rep, set, ovId);
                     oo.addOktOvelse(ovId, woId);
                 } else if (radUth.isSelected()) {
-                    int ovId = ov.getIdOvelseOnNameAndType("XXX", "utholdenhet");
+                    int ovId = ov.getIdOvelseOnNameAndType(type, "utholdenhet");
                     ov.addUtholdenhet(dur, hb, len, ovId);
                     oo.addOktOvelse(ovId, woId);
 
