@@ -1,5 +1,6 @@
 package database;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -11,10 +12,10 @@ public class ovelse extends DBConnect{
         super();
     }
 
-    public void addOvelse(String name, String description){
+    public void addOvelse(String name, String description, String type){
         try{
             stmt = conn.createStatement();
-            stmt.executeUpdate("INSERT INTO Ovelse(Navn, Beskrivelse) VALUES ('"+name+"', '"+description+"')");
+            stmt.executeUpdate("INSERT INTO Ovelse(Navn, Beskrivelse, type) VALUES ('"+name+"', '"+description+"', '"+type+"')");
             System.out.println("ovelse added");
 
         } catch(SQLException se){
@@ -61,6 +62,38 @@ public class ovelse extends DBConnect{
 
     }
 
+    public int getLastAddedOvingID(){
+        int id = -1;
+        try{
+            ResultSet data = stmt.executeQuery("SELECT OvelseID FROM Ovelse ORDER BY OvelseID DESC LIMIT 1");
+            while(data.next()) {
+                id = data.getInt("OvelseID");
+            }
+            return id;
+
+        } catch (SQLException se){
+            se.printStackTrace();
+        }
+
+        return id;
+    }
+
+    public int getIdOvelseOnNameAndType(String name, String type){
+        int id = -1;
+        try{
+            ResultSet data = stmt.executeQuery("SELECT * FROM Ovelse WHERE Ovelse.Navn = '"+name+"' AND  Ovelse.type = '"+type+"'");
+            while(data.next()){
+                id = data.getInt("OvelseID");
+            }
+
+        } catch (SQLException se){
+            System.out.println("problemer med getIdOvelseOnNameAndType");
+            se.printStackTrace();
+        }
+
+        return id;
+    }
+
 
 
 
@@ -68,8 +101,14 @@ public class ovelse extends DBConnect{
     public static void main(String[] args) {
         ovelse e = new ovelse();
         //e.addKondis(10,10,10,15);
-        e.addStyrke(10,10,10,15);
+        //e.addStyrke(10,10,10,15);
        //e.addUtholdenhet(10,180,7, 15);
+        //System.out.println(e.getIdOvelseOnNameAndType("markløft", "styrke"));
+        //e.addOvelse("Benkpres", "Viktig å spenne kjerne muskelaturen og presse benna ned i baken", "styrke");
+
+
+        e.close();
+
 
 
     }
