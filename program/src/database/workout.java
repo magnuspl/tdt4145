@@ -106,6 +106,22 @@ public class workout extends DBConnect{
          return -1;
     }
 
+    public int getLastAddedOkt(){
+        int id = -1;
+
+        try{
+            ResultSet data = stmt.executeQuery("SELECT OktID FROM Okt ORDER BY OktID DESC LIMIT 1");
+            while(data.next()){
+                id = data.getInt("OktID");
+                return id;
+            }
+        } catch(SQLException se){
+            System.out.println("problem med lastAddedOkt");
+            se.printStackTrace();
+        }
+        return id;
+    }
+
 
 
     public static void main(String[] args) {
@@ -113,6 +129,7 @@ public class workout extends DBConnect{
 
 
         workout mw = new workout();
+        System.out.println(mw.getLastAddedOkt());
         //mw.addOktOut(test, "08:10:15", 30, "hei", 3, 4, 5,"sol");
         //System.out.println(mw.getOktID(test, "08:10:15"));
 
