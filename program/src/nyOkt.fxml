@@ -13,22 +13,17 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="455.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="NyOktController">
    <children>
-      <Text layoutX="72.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dato">
+      <Text layoutX="72.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dato">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
-      <Text layoutX="61.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tidspunkt">
+      <Text layoutX="60.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tidspunkt">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
-      <Text layoutX="57.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Varighet">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Text>
-      <Text layoutX="57.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Velg øvelser">
+      <Text layoutX="57.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Varighet">
          <font>
             <Font size="19.0" />
          </font>
@@ -63,9 +58,8 @@
             <Font size="19.0" />
          </font>
       </Text>
-      <DatePicker fx:id="dato" layoutX="201.0" layoutY="88.0" prefHeight="25.0" prefWidth="192.0" />
-      <Text layoutX="305.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="minutter" />
-      <ComboBox fx:id="ovelser" layoutX="213.0" layoutY="219.0" onAction="#valgt_ovelse" prefWidth="150.0" promptText="Øvelser" />
+      <DatePicker fx:id="dato" layoutX="201.0" layoutY="101.0" prefHeight="25.0" prefWidth="192.0" />
+      <Text layoutX="297.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="minutter" />
       <CheckBox fx:id="inneCheck" layoutX="39.0" layoutY="397.0" mnemonicParsing="false" onAction="#inneCheck_changed" text="Innendørs">
          <font>
             <Font size="16.0" />
@@ -92,10 +86,11 @@
             <Font size="19.0" />
          </font>
       </Text>
-      <TextField fx:id="varighet_m" layoutX="215.0" layoutY="178.0" prefHeight="25.0" prefWidth="82.0" />
+      <TextField fx:id="varighet_m" layoutX="212.0" layoutY="204.0" prefHeight="25.0" prefWidth="82.0" />
       <Button fx:id="registrer" layoutX="189.0" layoutY="627.0" mnemonicParsing="false" onAction="#regOkt" text="Registrer" />
-      <Text fx:id="feilMessage" fill="RED" layoutX="270" layoutY="645"/>
+      <Text fx:id="feilMessage" fill="RED" layoutX="270" layoutY="645" />
 
-      <TextField fx:id="tidspunkt" layoutX="202.0" layoutY="133.0" promptText="HH/MM/SS" />
+      <TextField fx:id="tidspunkt" layoutX="202.0" layoutY="159.0" promptText="HH:MM:SS" />
+      <ComboBox fx:id="ovelser" layoutX="245.0" layoutY="260.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

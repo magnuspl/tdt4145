@@ -52,6 +52,7 @@ public class OvelseController implements Initializable {
     int hb;
 
 
+    @FXML
     String type;
 
 

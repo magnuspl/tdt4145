@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -29,6 +30,8 @@ public class Controller implements Initializable {
     private DBConnect dc;
     private ObservableList<HentInfo> data;
 
+    @FXML
+    protected Label lblStat, lblAvg, lblTot;
     @FXML
     protected TableView<HentInfo> table;
     @FXML
@@ -63,7 +66,7 @@ public class Controller implements Initializable {
         try{
 
             data = FXCollections.observableArrayList();
-            ResultSet rs = dc.getConn().createStatement().executeQuery("SELECT * from Okt order by Prestasjon DESC ");
+            ResultSet rs = dc.getConn().createStatement().executeQuery("SELECT OktID, Dato, Tidspunkt, Varighet, PersonligForm, Prestasjon, Inndors, Note from Okt order by Prestasjon DESC");
             while(rs.next()){
                 data.add(new HentInfo(rs.getString(1), rs.getString(2),
                         rs.getString(3), rs.getString(4), rs.getString(5),
@@ -88,10 +91,28 @@ public class Controller implements Initializable {
         table.setItems(null);
         table.setItems(data);
     }
+    public void getStats(Label l, String s){
+        try{
+            Connection conn = dc.getConn();
 
+            ResultSet rs = conn.createStatement().executeQuery(s);
+            while(rs.next()){
+                l.setText(rs.getString(1));
+            }
+        }catch(SQLException ex){
+            System.err.println("u fkd up"+ex);
+        }
+    }
     @FXML protected void handleStatistikk(Event event) throws SQLException {
+        String okt = ("SELECT COUNT(*) from Okt");
+        String avg = ("SELECT avg(Prestasjon) from Okt");
+        String tot = ("select sum(Varighet) from Okt");
+        getStats(lblStat, okt);
+        getStats(lblAvg, avg);
+        getStats(lblTot, tot);
 
     }
+
 
     public void initialize(URL url, ResourceBundle rb){
         dc = new DBConnect();
@@ -103,7 +124,7 @@ public class Controller implements Initializable {
         try{
             Connection conn = dc.getConn();
             data = FXCollections.observableArrayList();
-            ResultSet rs = conn.createStatement().executeQuery("SELECT * from Okt order by OktID DESC");
+            ResultSet rs = conn.createStatement().executeQuery("SELECT OktID, Dato, Tidspunkt, Varighet, PersonligForm, Prestasjon, Inndors, Note from Okt order by OktID");
             while(rs.next()){
                 data.add(new HentInfo(rs.getString(1), rs.getString(2),
                         rs.getString(3), rs.getString(4), rs.getString(5),
