@@ -47,8 +47,6 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.show();
-            Stage stage1 = (Stage) addButton.getScene().getWindow();
-            stage1.close();
 
         } catch (IOException e) {
 

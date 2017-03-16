@@ -21,6 +21,8 @@ import java.util.logging.Logger;
 public class OvelseController implements Initializable {
 
     @FXML
+    protected ToggleGroup Rtype;
+    @FXML
     protected Label kommentar;
     @FXML
     protected TextField belastning, reps, sett, lengde, varig, puls;
@@ -212,16 +214,9 @@ public class OvelseController implements Initializable {
 
 
 
-    public void disable(ComboBox dis1, ComboBox dis2, ComboBox dis3, ComboBox dis4) {
+    public void disable(ComboBox dis1, ComboBox dis2) {
         dis1.setDisable(true);
         dis2.setDisable(true);
-        dis3.setDisable(true);
-        dis4.setDisable(true);
-    }
-
-    public void enable(ComboBox en1, ComboBox en2) {
-        en1.setDisable(false);
-        en2.setDisable(false);
     }
 
     public void kondisStyrkeEn(TextField txt1, TextField txt2, TextField txt3) {
@@ -240,8 +235,8 @@ public class OvelseController implements Initializable {
     public void handleStyrk(ActionEvent actionEvent) {
 
         if (radStyrke.isSelected()) {
-            enable(dropStyrke, dropStyrkeAlt);
-            disable(dropKond, dropUth, dropKondAlt, dropUthAlt);
+            dropStyrke.setDisable(false);
+            disable(dropKond, dropUth);
             kondisStyrkeEn(belastning, reps, sett);
         } else {
             dropStyrke.setDisable(true);
@@ -251,8 +246,8 @@ public class OvelseController implements Initializable {
 
     public void handleKond(ActionEvent actionEvent) {
         if (radKond.isSelected()) {
-            enable(dropKond, dropKondAlt);
-            disable(dropStyrke, dropUth, dropStyrkeAlt, dropUthAlt);
+            dropKond.setDisable(false);
+            disable(dropStyrke, dropUth);
             kondisStyrkeEn(belastning, reps, sett);
         } else {
             dropKond.setDisable(true);
@@ -262,8 +257,8 @@ public class OvelseController implements Initializable {
 
     public void handleUth(ActionEvent actionEvent) {
         if (radUth.isSelected()) {
-            enable(dropUth, dropUthAlt);
-            disable(dropStyrke, dropKond, dropStyrkeAlt, dropKondAlt);
+            dropUth.setDisable(false);
+            disable(dropStyrke, dropKond);
             lengde.setDisable(false);
             varig.setDisable(false);
             puls.setDisable(false);
@@ -302,7 +297,6 @@ public class OvelseController implements Initializable {
         fillcombobox(dropStyrke, queryS);
         fillcombobox(dropKond, queryK);
         fillcombobox(dropUth, queryU);
-        kommentar.setText("skal vi ha kommentarer her?");
     }
 
     public void getShit(ComboBox cb) {

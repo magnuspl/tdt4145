@@ -12,7 +12,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="506.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OvelseController">
     <children>
-        <RadioButton fx:id="radStyrke" layoutX="36.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleStyrk" selected="true" text="Styrke">
+        <RadioButton fx:id="radStyrke" layoutX="36.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleStyrk" selected="true" text="Styrke" toggleGroup="$Rtype">
             <font>
                 <Font size="20.0" />
             </font>
@@ -58,10 +58,11 @@
             </font>
         </Text>
         <TextField fx:id="lengde" disable="true" layoutX="398.0" layoutY="259.0" prefHeight="25.0" prefWidth="57.0" />
-        <ComboBox fx:id="dropStyrkeAlt" layoutX="20.0" layoutY="120.0" prefHeight="25.0" prefWidth="124.0" />
-        <ComboBox fx:id="dropKondAlt" disable="true" layoutX="174.0" layoutY="120.0" prefHeight="25.0" prefWidth="124.0" />
-        <ComboBox fx:id="dropUthAlt" disable="true" layoutX="350.0" layoutY="120.0" prefHeight="25.0" prefWidth="124.0" />
-        <Label fx:id="kommentar" layoutX="84.0" layoutY="176.0" prefHeight="76.0" prefWidth="338.0" text="Legg gjerne til flere øvelser" />
+        <Label fx:id="kommentar" layoutX="84.0" layoutY="176.0" prefHeight="76.0" prefWidth="338.0" text="Legg gjerne til flere øvelser">
+         <font>
+            <Font size="22.0" />
+         </font>
+        </Label>
         <Text layoutX="51.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Velg øvelse" />
         <Text layoutX="206.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Velg øvelse" />
         <Text layoutX="381.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Velg øvelse" />
